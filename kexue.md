@@ -76,5 +76,11 @@
 ```
 ##### *效果图*
 ![Youtube](/youtube.png)
-如果有什么可以联系我[@wjybluse](https://github.com/wjybluse)
+如果有什么可以联系我
+
+- [Github @wjybluse](https://github.com/wjybluse)
+- [Facebook @Elians](https://www.facebook.com/wantingyi)
+- [Google+ Wan](https://plus.google.com)
+- [Twitter @Elianswan](https://twitter.com/Elianswan)
+
 
