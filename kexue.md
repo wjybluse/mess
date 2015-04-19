@@ -10,21 +10,10 @@
 ### 2.配置server端(即你购买的vps)
 >首先登陆你的机器,根据你先的操作系统检查一下你相关软件的版本,shadowsocks提供了不同版本的server端,选择适合你自己的即可,下面给大家介绍**python**版和**c**版
 >
-1. python版本的[shadowsocks](https://github.com/shadowsocks/shadowsocks.git "shadowsocks"),如果使用习惯git的话直接git clone https://github.com/shadowsocks/shadowsocks.git即可。如果机器上没有安装git的,yum -y install git /apt-get install git,如果不习惯可以直接wget https://github.com/shadowsocks/shadowsocks/archive/master.zip即可
+1. python版本的[shadowsocks](https://github.com/shadowsocks/shadowsocks.git "shadowsocks"),如果使用习惯git的话直接git clone [https://github.com/shadowsocks/shadowsocks.git](https://github.com/shadowsocks/shadowsocks.git)即可。如果机器上没有安装git的,yum -y install git /apt-get install git,如果不习惯可以直接wget [https://github.com/shadowsocks/shadowsocks/archive/master.zip](https://github.com/shadowsocks/shadowsocks/archive/master.zip)即可
 2. 解压,在这之前确认你的python版本2.6及以上,还有附加的巩固python-pip等,python3不知道支持咋样,大家可以自行尝试,执行sudo python setup.py install即可
 3. 如果一切正常的话可以进行可以查看到ssserver命令,直接输入ssserver,然后tab键看一下是否能联想,如果没问题就说明一切正常
 4. 增加配置文件config.json,格式如下,启动server,启动命令ssserver -c config.json &
->config.json<br/>
-    {
-    "server":"0.0.0.0",
-    "server_port":12345,
-    "local_address": "127.0.0.1",
-    "local_port":1080,
-    "password":"yourpass",
-    "timeout":300,
-    "method":"aes-256-cfb",
-    "fast_open": false
-}<br/>
 1. c版本的和python的差不多,下载[shadowsocks-libev](https://github.com/shadowsocks/shadowsocks-libev.git "shadowsocks-libev")--->解压--->make(依赖了openssl,所以需要安装openssl和openssl-devel)--->make install,编译完了在src下面有一个	ss-server可执行文件,执行./ss-server -c config.json &即可
 
 
@@ -65,6 +54,20 @@
 	
 	#start server in deamon
 	./src/ss-server -c /path/to/config/json &
+```
+#####*config.json文件如下*
+```javascript
+//config.json
+ {
+    "server":"0.0.0.0",
+    "server_port":12345,
+    "local_address": "127.0.0.1",
+    "local_port":1080,
+    "password":"yourpass",
+    "timeout":300,
+    "method":"aes-256-cfb",
+    "fast_open": false
+}
 ```
 如果有什么可以联系我[@wjybluse](https://github.com/wjybluse)
 
