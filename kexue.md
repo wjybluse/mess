@@ -2,11 +2,15 @@
 ### 1. 准备工作
 >你得有一台vps,如果不知道怎么去找好的vps可以看下面的推荐:
 >
->1).[linode](http://linnode.com/ "linode"),速度还不错,如果运气好选到日本数据中心的话,其他数据中心速度一般
+>1).[linode](http://linnode.com/ "linode"),速度还不错,如果运气好选到日本数据中心的话,其他数据中心速度一般![linode](/linode.png)
 > 
->2).[vultr](http://www.vultr.com/?ref=6828826 "vultr"),现在正在用,速度不错,当然也是选日本数据中心,最大的好处是便宜,价格是linode额一半左右,科学上网流量一般是没问题,200G
+>2).[vultr](http://www.vultr.com/?ref=6828826 "vultr"),现在正在用,速度不错,当然也是选日本数据中心,最大的好处是便宜,价格是linode额一半左右,科学上网流量一般是没问题,200G,支持Paypal支付![vultr](/vultr.png)
 >
 >3).[digitalocean](https://www.digitalocean.com "digitalocean"),之前在github上看到的,不知道速度咋样,价格比linode便宜是真的
+>
+>4.AWS,速度很一般,不过可以可以试用一年,免费
+>
+>5.Azure,理论网速很快啊,但是日本DC体验都很一般啊
 
 ### 2.配置server端(即你购买的vps)
 >首先登陆你的机器,根据你先的操作系统检查一下你相关软件的版本,shadowsocks提供了不同版本的server端,选择适合你自己的即可,下面给大家介绍**python**版和**c**版
