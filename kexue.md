@@ -22,7 +22,7 @@
 >
 1. Windows机器上面需要下载一个客户端工具,Shadowsocks-gui,下载地址[client](http://sourceforge.net/projects/shadowsocksgui/files/dist/Shadowsocks-win-2.3.1.zip/download "client"),希望你还能正常访问,使用chrome需要用一个插件[SwitchyOmega](https://github.com/FelisCatus/SwitchyOmega/releases/download/v2.3.11/SwitchyOmega.crx "SwitchyOmega"),安装方式:**在chrome地址栏输入chrome://extensions/---->将插件网页拖拽**即可
 2. 配置SwitchyOmega,**点击插件-->选项-->新建情景模式--->设置名字--->http代理---->输入127.0.0.1--->端口1080--->保存--->点击插件--->选择刚才设置的情景名**<br/>安装完插件如下:![proxy](/proxy.png) 代理配置完成如下:![mode](/mode.png)
-3. 启动Shadowsocks-gui,**输入虚拟机的ip-->你设置的端口-->密码,点击确定**即可
+3. 启动Shadowsocks-gui,**输入虚拟机的ip-->你设置的端口-->密码,点击确定**即可![shadowsocks_gui](/shadowsocks_gui.png)
 4. 访问[google](https://google.com),如果能访问说明生效,不行的话看一下哪里出问题了,祝大家好运
 
 ### 4.上述备注
