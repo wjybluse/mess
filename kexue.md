@@ -8,18 +8,18 @@
 >
 >3).[digitalocean](https://www.digitalocean.com "digitalocean"),之前在github上看到的,不知道速度咋样,价格比linode便宜是真的
 >
->4.AWS,速度很一般,不过可以可以试用一年,免费
+>4.[AWS](http://aws.amazon.com/),速度很一般,不过可以可以试用一年,免费
 >
->5.Azure,理论网速很快啊,但是日本DC体验都很一般啊
+>5.[Azure](http://azure.microsoft.com/),理论网速很快啊,但是日本DC体验都很一般啊
 
 ### 2.配置server端(即你购买的vps)
 >首先登陆你的机器,根据你先的操作系统检查一下你相关软件的版本,shadowsocks提供了不同版本的server端,选择适合你自己的即可,下面给大家介绍**python**版和**c**版
 >
 1. python版本的[shadowsocks](https://github.com/shadowsocks/shadowsocks.git "shadowsocks"),如果使用习惯git的话直接[git clone https://github.com/shadowsocks/shadowsocks.git](https://github.com/shadowsocks/shadowsocks.git)即可。如果机器上没有安装git的,yum -y install git /apt-get install git,如果不习惯可以直接[wget https://github.com/shadowsocks/shadowsocks/archive/master.zip](https://github.com/shadowsocks/shadowsocks/archive/master.zip)即可
-2. 解压,在这之前确认你的python版本2.6及以上,还有附加的巩固python-pip等,python3不知道支持咋样,大家可以自行尝试,执行sudo python setup.py install即可
+2. 解压,在这之前确认你的python版本2.6及以上,还有附加的巩固python-pip等,python3不知道支持咋样,大家可以自行尝试,执行sudo python setup.py install
 3. 如果一切正常的话可以进行可以查看到ssserver命令,直接输入ssserver,然后tab键看一下是否能联想,如果没问题就说明一切正常
 4. 增加配置文件config.json,格式如下,启动server,启动命令ssserver -c config.json &
-1. c版本的和python的差不多,下载[shadowsocks-libev](https://github.com/shadowsocks/shadowsocks-libev.git "shadowsocks-libev")--->解压--->make(依赖了openssl,所以需要安装openssl和openssl-devel)--->make install,编译完了在src下面有一个	ss-server可执行文件,执行./ss-server -c config.json &即可
+1. c版本的和python的差不多,下载[shadowsocks-libev](https://github.com/shadowsocks/shadowsocks-libev.git "shadowsocks-libev")--->解压--->make(依赖了openssl,所以需要安装openssl和openssl-devel)--->make install,编译完了在src下面有一个	ss-server可执行文件,执行./ss-server -c config.json &
 
 
 ### 3.客户端配置
@@ -43,7 +43,7 @@
 	sudo python setup.py install
 	
 	#start server in deamon
-	sudo ssserver -c /path/to/config/json &
+	sudo ssserver -c /path/to/config.json &
 ```
 #####*c版安装代码*
 ```shell
@@ -58,7 +58,7 @@
 	make && make install
 	
 	#start server in deamon
-	./src/ss-server -c /path/to/config/json &
+	./src/ss-server -c /path/to/config.json &
 ```
 #####*config.json文件如下*
 ```javascript
@@ -76,7 +76,7 @@
 ```
 ##### *效果图*
 ![Youtube](/youtube.png)
-如果有什么可以联系我
+如果有什么问题可以联系我:
 
 - [Github @wjybluse](https://github.com/wjybluse)
 - [Facebook @Elians](https://www.facebook.com/wantingyi)
