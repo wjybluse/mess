@@ -5,6 +5,7 @@
 
 #### 2.docker简单部署
 >1.Linux系统下,sudo apt-get install docker-io,sudo yum -y install docker-io
+
 >2.Windows 和Mac下直接安装boot2docker
 
 
