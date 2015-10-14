@@ -7,3 +7,5 @@
 >>1.[docker的简单使用，部署一个自己的开发环境，并且打包分发](docker.md)
 
 >>2.[vagrant的简单使用](vagrant.md)
+
+>>3.[Linux简单命令笔记](linux.md)
