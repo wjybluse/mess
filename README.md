@@ -11,3 +11,5 @@
 >>3.[Linux简单命令笔记](linux.md)
 
 >>4.[Ansible 使用遇到的坑](ansible.md)
+
+>>5.[Kubernetes的简单部署](kubernetes.md)
