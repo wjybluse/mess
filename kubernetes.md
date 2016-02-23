@@ -65,7 +65,8 @@ sudo chmod +x /usr/local/bin/kubectl #change permission
 #create file 
 touch ~/.kube/config
 ```
-yml file 
+
+Yml file 
 ```yml
 apiVersion: v1
 clusters:
@@ -87,7 +88,8 @@ users:
     password: secret
     username: admin
 ```
-#### 创建应用
+
+创建应用
 ```shell
 kubectl run my-nginx --image=nginx --replicas=2 --port=80
 #query pod
