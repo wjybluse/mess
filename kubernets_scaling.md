@@ -19,4 +19,8 @@ the horizontal pod autoscaler will not be bound to the new replication controlle
 
 > 5.Extenstion
 
+> 6.Unspported more futrues in new version kubernetes,may be in next version can find more
+
+> 7.Cannot scaling when update-roll or deploy
+
 
