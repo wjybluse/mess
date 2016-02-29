@@ -26,6 +26,6 @@ the horizontal pod autoscaler will not be bound to the new replication controlle
 > 8.Create one autoscaling group 
 ```shell
 kubectl autoscale -f pod_with_scale_controller.yaml --min=2 --max=5 --cpu-percent=10
-```shell
+```
 
 
