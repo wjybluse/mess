@@ -37,3 +37,7 @@
     }
 }
 ```
+
+3.Controller指定containerPort，就是导出端口，指定hostPort的话就是做端口映射到相应的主机，一般应该需要导出端口把，然后做一个service层的负载均衡
+
+4.测试一下
