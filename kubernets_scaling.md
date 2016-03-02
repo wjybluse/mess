@@ -28,4 +28,9 @@ the horizontal pod autoscaler will not be bound to the new replication controlle
 kubectl autoscale -f pod_with_scale_controller.yaml --min=2 --max=5 --cpu-percent=10
 ```
 
+> 9.AutoScaling主要是利用heapster做数据采集，然后存入influxdb里面，之后分析，然后做扩容或者缩容，必须保证数据采集能成功，现在环境报的错为Code: System error，Message: not a directory，不是一个目录，应该还挂在卷不成功，跟docker版本有关系吧
+
+> 8.之前通过kubectl autoscale -f <filename> 应该也没问题，需要验证一下 
+
+
 
