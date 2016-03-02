@@ -41,16 +41,14 @@
 -j ：后面接动作，主要的动作有接受(ACCEPT)、丢弃(DROP)、拒绝(REJECT)及记录(LOG)
 
 #TCP, UDP 的规则比对：针对端口设定
-
-    iptables [-AI 链] [-io 网络接口] [-p tcp,udp] [-s 来源IP/网域] [--sport 埠口范围] [-d 目标IP/网域] [--dport 端口范围] -j [ACCEPT|DROP|REJECT]
+iptables [-AI 链] [-io 网络接口] [-p tcp,udp] [-s 来源IP/网域] [--sport 埠口范围] [-d 目标IP/网域] [--dport 端口范围] -j [ACCEPT|DROP|REJECT]
 
 选项与参数：
 --sport 埠口范围：限制来源的端口号码，端口号码可以是连续的，例如 1024:65535
 --dport 埠口范围：限制目标的端口号码。
 
 #iptables 外挂模块：mac 与 state
-
-    iptables -A INPUT [-m state] [--state 状态]
+iptables -A INPUT [-m state] [--state 状态]
 
 选项与参数：
 -m ：一些 iptables 的外挂模块，主要常见的有：
@@ -186,6 +184,7 @@ crontab -e
 9.iptables -P FORWARD DROP 同样地，在这里我们将 FORWARD 链的缺省政策设为 DROP，因为我们并不是用计算机作为路由器，所以理应没有任何封包路经它。
 10.iptables -P OUTPUT ACCEPT 而最后，我们将 OUTPUT 链的缺省政策设为 ACCEPT，因为我们想容许所有对外的流量（由于我们信任我们的用户）。
 11.iptables -L -v 最后，我们可以列出（-L）刚加入的规则，并检查它们是否被正确地装入
+12.查找各个国家ip地址的范围[Block List](http://www.ip2location.com/free/visitor-blocker)
 
 
  
