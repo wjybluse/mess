@@ -1,0 +1,54 @@
+> Update docker egine and restart the kubelet and kube-proxy
+```shell
+#!/bin/bash
+
+#1.uninstall docker-engine-selinux
+yum -y remove docker-selinux.x86_64
+if [ $? -ne 0 ];then
+  echo "Uninstall selinux failed"
+  exit 1
+fi
+
+yum -y install https://yum.dockerproject.org/repo/main/centos/7/Packages/docker-engine-selinux-1.10.3-1.el7.centos.noarch.rpm
+
+yum -y install https://yum.dockerproject.org/repo/main/centos/7/Packages/docker-engine-1.10.3-1.el7.centos.x86_64.rpm
+
+if [ $? -ne 0 ]; then
+  echo "Install failed"
+  exit 1
+fi
+
+#check docker service
+dpid=`ps -ef|grep -v|grep docker`
+if [ "X$dpid" = "X" ]; then
+	echo "docker start failed,retry starting...."
+        service docker restart
+fi
+
+#check kubelet and kube-proxy
+kube=`ps -ef|grep -v|grep kubelet`
+if [ "X$kube" = "X" ];then
+  echo "kubelet was killed"
+  service kubelet start
+  service kube-proxy start
+fi 
+if [ $? -ne 0 ];then
+  echo "update docker engine failed"
+  exit 1
+fi
+
+#start all containers
+docker start $(docker ps -qa)
+if [ $? -ne 0 ]; then
+ echo "start contianer failed"
+ exit 1
+fi
+echo "Install success!!!" 
+```
+
+> 2.Download newest docekr package
+>> For centos7,[packages](https://yum.dockerproject.org/repo/main/centos/7/Packages/)
+
+>>Remove selinux before,and install http://yum.dockerproject.org/repo/main/centos/7/Packages/docker-engine-selinux-1.10.1-1.el7.centos.noarch.rpm
+
+>>Then install egine
