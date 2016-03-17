@@ -95,3 +95,135 @@ curl localhost/ -H 'X-Uid:23'
 
 #### 二.如果是在虚拟机或者物理机部署，不是裸机的话可以省去安装工具的步骤，其他同上
 
+#### 三.写简单的扩展，需要增加两个文件和修改一个配置文件
+> Step 1.在lib/abtesting/utils的init.lua里面增加如下代码
+```lua
+--增加解析器
+_M.divtypes = {
+    ["iprange"]     = 'ipParser',
+    ["uidrange"]    = 'uidParser',
+    ["uidsuffix"]   = 'uidParser',
+    ["uidappoint"]  = 'uidParser',
+    ["arg_city"]    = 'cityParser',
+    --token parser
+    ["tokensuffix"] = 'tokenParser'
+}
+```
+
+>2.Step 2.在lib/abtesting/diversion里面添加一个文件，文件名和上述初始化的时候key相同，即tokensuffix.lua
+里面实现一个接口的各种方法签名，方法有(new,check,get,set,getUpstream),大致代码如下：
+```lua
+local modulename="abtestingDiversionTokenSuffix"
+local _M    = {}
+local mt    = { __index = _M }
+_M._VERSION = "0.0.1"
+
+local ERRORINFO	= require('abtesting.error.errcode').info
+
+local k_token     = 'tokensuffix'
+local k_upstream = 'upstream'
+
+_M.new = function(self, database, policyLib)
+    if not database then
+        error{ERRORINFO.PARAMETER_NONE, 'need avaliable redis db'}
+    end if not policyLib then
+        error{ERRORINFO.PARAMETER_NONE, 'need avaliable policy lib'}
+    end
+
+    self.database = database
+    self.policyLib = policyLib
+    return setmetatable(self, mt)
+end
+
+--check the message
+local isNULL = function(v)
+    return v and v ~= ngx.null
+end
+
+--check method ,policy format as {{"tokensuffix"="test","upstream"="beta1"}}
+_M.check = function(self, policy)
+  for _,value in pairs(policy) do
+    local suffix = value[k_token]
+    local upstream = value[k_upstream]
+    -- check the suffix and upstream is null or not
+    if not suffix or not upstream then
+      local desc = "invalid suffix or upstream"
+      local info = ERRORINFO.POLICY_INVALID_ERROR
+      -- invalid policy,pls check the value of policy
+      return {false,info,desc}
+    end
+  end
+  -- if it is ok ,return true
+  return {true}
+end
+
+--use suffix parser set method
+_M.set = function(self, policy)
+    local database  = self.database
+    local policyLib = self.policyLib
+
+    database:init_pipeline()
+    for _, v in pairs(policy) do
+        database:hset(policyLib, v[k_token], v[k_upstream])
+    end
+    local ok, err = database:commit_pipeline()
+    if not ok then
+        error{ERRORINFO.REDIS_ERROR, err}
+    end
+end
+
+--use default get method
+_M.get = function(self)
+    local database  = self.database
+    local policyLib = self.policyLib
+
+    local data, err = database:hgetall(policyLib)
+    if not data then
+        error{ERRORINFO.REDIS_ERROR, err}
+    end
+
+    return data
+end
+
+--upstream method
+_M.getUpstream = function(self, tokensuffix)
+    local database	= self.database
+    local policyLib = self.policyLib
+    --find upstream,if not find ,return error information
+    local upstream, err = database:hget(policyLib , tokensuffix)
+    if not upstream then error{ERRORINFO.REDIS_ERROR, err} end
+    if upstream == ngx.null then
+        return nil
+    else
+        return upstream
+    end
+end
+
+return _M
+```
+
+> Step 3.在lib/abtesting/userinfo里面增加一个解析器tokenParser.lua,大致代码如下，非常简单
+```lua
+local _M = {
+    _VERSION = '0.01'
+}
+
+_M.get = function()
+  --create local varibale to store the value of token suffix
+	local token = ngx.req.get_headers()["X-token"]
+  if not token then
+    return ""
+  end
+	_,suffix = token:match("([^-]+)-([^-]+)")
+  if not suffix then
+    -- if suffix is empty ,return enmpty string else return suffix
+    return ""
+  end
+  return suffix
+end
+return _M
+```
+
+>Step 4.上述为插件的简单生成模式，测试过了之后即可使用
+
+
