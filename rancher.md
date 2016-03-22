@@ -5,7 +5,6 @@ kcsn:
   tty: true
   image: daocloud.io/nginx
   stdin_open: true
-
 #rancher-compose.yml
 kcsn:
   scale: 2
