@@ -30,6 +30,7 @@ lb:
     name: simple sonfig
 kingdee/kcsn:
   scale: 1
+#can change
 ```
 
 >3.创建一个内部服务
