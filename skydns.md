@@ -61,3 +61,6 @@ nameserver 169.254.169.250
 curl voice.p.kingdee.skydns.local:8778
 #every work good
 ```
+
+2.在容器里面运行的，做自动发现
+> 好像作用并不明显，现在需要的只是在容器里面感知到其他服务是OK的
